@@ -22,7 +22,13 @@ public class Main {
 
 
 
+        List<Toy> prize = new ArrayList<Toy>(1);
+        craneMachine.trial(toys, 2, craneMachine.getCranePower());
 
+        System.out.println(prize.toString());
 
+        craneMachine.removeToy(toys,prize);
+
+        System.out.println(craneMachine.toString());
     }
 }
