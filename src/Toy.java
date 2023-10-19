@@ -1,5 +1,8 @@
+import java.util.Random;
+
 public class Toy {
 
+    static Random random = new Random();
     String name;
     String type;
     double weight;
@@ -9,7 +12,7 @@ public class Toy {
     private static int uid = 0;
 
     public Toy(String name) {
-        int numName = (int) Math.random() * (7);
+        int numName = random.nextInt(7);
         switch (numName) {
             case 0:
                 this.type = "Кот";
@@ -33,8 +36,8 @@ public class Toy {
                 this.type = "Кролик";
                 break;
         }
-        int numform = (int) Math.random() * (3);
-        switch (numName) {
+        int numForm = random.nextInt(3);
+        switch (numForm) {
             case 0:
                 this.form = "Простая";
                 break;
@@ -45,8 +48,9 @@ public class Toy {
                 this.form = "Сложная";
                 break;
         }
-        this.weight = 1+ Math.random() * (51);
+        this.weight = random.nextInt( 10,50);
         uid++;
+        this.name = name;
     }
 
     public static int getUid() {
@@ -55,6 +59,8 @@ public class Toy {
 
     @Override
     public String toString() {
-        return  name + " - " + type + ", весом " + weight + " г." + ", форма - " + form;
+        return  "\n" + "Мягкая игрушка" + " - " + type + ", весом " + weight + " г." + ", форма - " + form + "\n";
     }
+
+
 }

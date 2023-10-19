@@ -10,9 +10,9 @@ public class Main {
             craneMachine.addToy(toys, "Мягкая игрушка");
         }
 
-        Toy toy = new Toy("Игрушка");
-        toy.toString();
-        craneMachine.toString();
+        System.out.println(craneMachine.toString());
+
+
 
 
 

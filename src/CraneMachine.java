@@ -23,7 +23,6 @@ public class CraneMachine {
 
     @Override
     public String toString() {
-        return "В автомате сейчас находятся: " + '\''
-                + toys;
+        return "В автомате сейчас находятся: " + '\n' + toys;
     }
 }
