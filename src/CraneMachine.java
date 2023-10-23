@@ -1,10 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 public class CraneMachine {
 
 
+    Scanner sc = new Scanner(System.in);
     static Random random = new Random();
     private List<Toy> toys;
     private int capacity;
@@ -37,8 +39,7 @@ public class CraneMachine {
         return toys;
     }
 
-    public List<Toy> trial(List<Toy> toys, int target, int cranePower) {
-        List<Toy> prize = new ArrayList<>();
+    public List<Toy> trial(List<Toy> toys, int target, int cranePower, List<Toy> prize) {
         int currentlyCranePower = random.nextInt(cranePower);
         for(Toy t: toys){
             if (target == t.getUid()) {
@@ -50,12 +51,36 @@ public class CraneMachine {
         return prize;
     }
 
+    public int checkTarget(int uidTarget) throws TargetException{
+        if (uidTarget > Toy.getMaxToys() || uidTarget < 0){
+            throw new TargetException("Ошибка. Введено неверное id игрушки.");
+        }
+        return uidTarget;
+    }
+
+    public void setTarget(int target) {
+        this.target = target;
+    }
+
     public int getCranePower() {
         return cranePower;
+    }
+
+    public int getTarget() {
+        return target;
     }
 
     @Override
     public String toString() {
         return "В автомате сейчас находится " + Toy.getMaxToys() + " игрушек: " + '\n' + toys;
     }
+
+    public final String actionMenuText() {
+        return "Выберите действие:" + '\n' +
+                "1. Выбрать игрушку" + '\n' +
+                "2. Начать" + '\n' +
+                "1. Забрать приз" + '\n';
+    }
+
+
 }

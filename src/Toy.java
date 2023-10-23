@@ -94,13 +94,14 @@ public class Toy {
         return uid;
     }
 
+
     public void setUid(int uid) {
         this.uid = uid;
     }
 
     @Override
     public String toString() {
-        return  "\n" + uid + ": Мягкая игрушка" + " - " + type + ", весом " + weight + " г." + ", форма - " + form + "\n";
+        return  "\n" + uid + ": Мягкая игрушка" + " - " + type + ", весом " + weight + " г" + ", форма - " + form + "\n";
     }
 
 
