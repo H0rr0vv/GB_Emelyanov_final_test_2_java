@@ -15,41 +15,44 @@ public class Main {
         for (Toy toy: toys) {
             toy.setDifficulty(toy.getWeight(), toy.getForm(), toys);
         }
-        List<Toy> prize = new ArrayList<Toy>(1);
-
-
-
-        System.out.println(craneMachine.toString());
+        Toy prize = new Toy();
         System.out.println(craneMachine.actionMenuText());
+
+
+
+
 
         Integer switchMenu = sc.nextInt();
         boolean flag = true;
-        while (flag){
-            try{
-                switch(switchMenu){
+        while (flag) {
+            try {
+                switch (switchMenu) {
                     case 1:
+                        System.out.println(craneMachine.toString());
                         int newTarget = craneMachine.checkTarget(sc.nextInt());
                         craneMachine.setTarget(newTarget);
+                        System.out.println(craneMachine.actionMenuText());
                         break;
                     case 2:
-                        craneMachine.trial(toys, craneMachine.getTarget(), craneMachine.getCranePower(), prize);
-                        break;
+                        if (CraneMachine.isWin()) {
+                            craneMachine.trial(toys, craneMachine.getTarget(), craneMachine.getCranePower(), prize);
+                            craneMachine.removeToy(toys,prize);
+                            System.out.println(craneMachine.actionMenuText());
+                            break;
+                        }
                     case 3:
+                        if(CraneMachine.isWin()){
+                            craneMachine.winToString(prize);
+                        }
+                        else {
+                            System.out.println("Вы ничего не выиграли. Может повезет в следующий раз.");
+                        }
+                        flag = false;
                         break;
                 }
             } catch (TargetException e) {
                 System.out.println(e.getMessage());
-            } catch () {
-
             }
         }
-
-        craneMachine.trial(toys, 2, craneMachine.getCranePower(), prize);
-
-        System.out.println(prize.toString());
-
-        craneMachine.removeToy(toys,prize);
-
-        System.out.println(toys.toString());
     }
 }

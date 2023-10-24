@@ -12,6 +12,7 @@ public class CraneMachine {
     private int capacity;
     private int cranePower;
     private int target;
+    private static boolean win = false;
 
     public int getCapacity() {
         return capacity;
@@ -29,8 +30,12 @@ public class CraneMachine {
         return toys;
     }
 
-    public List<Toy> removeToy(List<Toy> toys, List<Toy> prize){
-        toys.remove(prize.get(0).getUid()-1);
+    public List<Toy> removeToy(List<Toy> toys, Toy prize){
+        for (Toy t: toys){
+            if (prize.equals(t)){
+                toys.remove(t);
+            }
+        }
         int newUid = 1;
         for (Toy toy: toys){
             toy.setUid(newUid);
@@ -39,16 +44,21 @@ public class CraneMachine {
         return toys;
     }
 
-    public List<Toy> trial(List<Toy> toys, int target, int cranePower, List<Toy> prize) {
+    public Toy trial(List<Toy> toys, int target, int cranePower, Toy prize) {
         int currentlyCranePower = random.nextInt(cranePower);
         for(Toy t: toys){
             if (target == t.getUid()) {
                 if (currentlyCranePower > t.getDifficulty()) {
-                    prize.add(0, t);
+                    prize = t;
+                    win = true;
                 }
             }
         }
         return prize;
+    }
+
+    public static boolean isWin() {
+        return win;
     }
 
     public int checkTarget(int uidTarget) throws TargetException{
@@ -60,6 +70,10 @@ public class CraneMachine {
 
     public void setTarget(int target) {
         this.target = target;
+    }
+
+    public Toy  getPrize(Toy prize){
+        return prize;
     }
 
     public int getCranePower() {
@@ -75,11 +89,15 @@ public class CraneMachine {
         return "В автомате сейчас находится " + Toy.getMaxToys() + " игрушек: " + '\n' + toys;
     }
 
+    public String winToString(Toy prize){
+        return "Вы выиграли: " + '\n' + prize.toString();
+    }
+
     public final String actionMenuText() {
         return "Выберите действие:" + '\n' +
                 "1. Выбрать игрушку" + '\n' +
                 "2. Начать" + '\n' +
-                "1. Забрать приз" + '\n';
+                "3. Забрать приз" + '\n';
     }
 
 

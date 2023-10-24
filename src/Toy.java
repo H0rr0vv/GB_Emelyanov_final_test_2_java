@@ -57,6 +57,13 @@ public class Toy {
         this.name = name;
     }
 
+    public Toy () {
+        this.name = "Выигранная игрушка";
+        this.uid = 0;
+
+
+    }
+
     public static int getMaxToys() {
         return maxToys;
     }
