@@ -22,6 +22,9 @@ public class CraneMachine {
     public static boolean isWin() {
         return win;
     }
+    public boolean resetWin() {
+        return win = false;
+    }
 
     public int getCapacity() {
         return capacity;
@@ -96,7 +99,8 @@ public class CraneMachine {
         return "Выберите действие:" + '\n' +
                 "1. Выбрать игрушку" + '\n' +
                 "2. Начать" + '\n' +
-                "3. Забрать приз" + '\n';
+                "3. Забрать приз" + '\n' +
+                "4. Выход";
     }
 
     public void timeOutOneSecond(){

@@ -34,7 +34,7 @@ public class Main {
                         break;
                     case 2:
                         System.out.println("Игра началась");
-                        if (CraneMachine.isWin()) {
+                        if (!CraneMachine.isWin()) {
                             craneMachine.trial(toys, craneMachine.getTarget(), craneMachine.getCranePower(), prize);
                             craneMachine.removeToy(toys, prize);
                         }
@@ -52,6 +52,9 @@ public class Main {
                         } else {
                             System.out.println("Вы ничего не выиграли. Может повезет в следующий раз.");
                         }
+                        craneMachine.resetWin();
+                        break;
+                    case 4:
                         flag = false;
                         break;
                     default:
