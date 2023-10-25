@@ -1,5 +1,5 @@
 public class TargetException extends Exception {
-    public TargetException(String message){
+    public TargetException(String message) {
         super(message);
     }
 }

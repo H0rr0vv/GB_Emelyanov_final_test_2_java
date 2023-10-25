@@ -1,58 +1,65 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
+        Scanner sm = new Scanner(System.in);
         List<Toy> toys = new ArrayList<Toy>();
         CraneMachine craneMachine = new CraneMachine(toys, 10);
         while (Toy.getMaxToys() < craneMachine.getCapacity()) {
             craneMachine.addToy(toys, "Мягкая игрушка");
         }
 
-        for (Toy toy: toys) {
+        for (Toy toy : toys) {
             toy.setDifficulty(toy.getWeight(), toy.getForm(), toys);
         }
         Toy prize = new Toy();
-        System.out.println(craneMachine.actionMenuText());
 
 
-
-
-
-        Integer switchMenu = sc.nextInt();
         boolean flag = true;
-        while (flag) {
-            try {
-                switch (switchMenu) {
+        try {
+            while (flag) {
+                System.out.println(craneMachine.actionMenuText());
+                switch (sm.nextInt()) {
                     case 1:
                         System.out.println(craneMachine.toString());
-                        int newTarget = craneMachine.checkTarget(sc.nextInt());
+                        System.out.println("Выберете желаемую игрушку");
+                        int newTarget = sc.nextInt();
+                        craneMachine.checkTarget(newTarget);
                         craneMachine.setTarget(newTarget);
-                        System.out.println(craneMachine.actionMenuText());
                         break;
                     case 2:
+                        System.out.println("Игра началась");
                         if (CraneMachine.isWin()) {
                             craneMachine.trial(toys, craneMachine.getTarget(), craneMachine.getCranePower(), prize);
-                            craneMachine.removeToy(toys,prize);
-                            System.out.println(craneMachine.actionMenuText());
-                            break;
+                            craneMachine.removeToy(toys, prize);
                         }
+                        craneMachine.timeOutOneSecond();
+                        System.out.println(".");
+                        craneMachine.timeOutOneSecond();
+                        System.out.println("..");
+                        craneMachine.timeOutOneSecond();
+                        System.out.println("...");
+                        System.out.println("Конец игры");
+                        break;
                     case 3:
-                        if(CraneMachine.isWin()){
+                        if (CraneMachine.isWin()) {
                             craneMachine.winToString(prize);
-                        }
-                        else {
+                        } else {
                             System.out.println("Вы ничего не выиграли. Может повезет в следующий раз.");
                         }
                         flag = false;
                         break;
+                    default:
+                        System.out.println("Ошибка. Такого пункта меню нет.");
                 }
-            } catch (TargetException e) {
-                System.out.println(e.getMessage());
             }
+        } catch (TargetException e) {
+            System.out.println(e.getMessage());
         }
     }
 }

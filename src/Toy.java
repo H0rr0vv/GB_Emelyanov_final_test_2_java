@@ -4,13 +4,13 @@ import java.util.Random;
 public class Toy {
 
     static Random random = new Random();
+    private static int maxToys = 0;
     private String name;
     private String type;
     private int weight;
     private String form;
     private Integer difficulty;
     private int uid;
-    private static int maxToys = 0;
 
 
     public Toy(String name) {
@@ -50,14 +50,14 @@ public class Toy {
                 this.form = "Сложная";
                 break;
         }
-        this.weight = random.nextInt( 100,300);
+        this.weight = random.nextInt(100, 300);
         maxToys++;
         uid++;
         this.uid = maxToys;
         this.name = name;
     }
 
-    public Toy () {
+    public Toy() {
         this.name = "Выигранная игрушка";
         this.uid = 0;
 
@@ -108,7 +108,7 @@ public class Toy {
 
     @Override
     public String toString() {
-        return  "\n" + uid + ": Мягкая игрушка" + " - " + type + ", весом " + weight + " г" + ", форма - " + form + "\n";
+        return "\n" + uid + ": Мягкая игрушка" + " - " + type + ", весом " + weight + " г" + ", форма - " + form + "\n";
     }
 
 
